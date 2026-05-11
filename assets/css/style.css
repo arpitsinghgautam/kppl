@@ -5179,3 +5179,46 @@ Animation  CSS
 Animation  CSS End
 =================================*/
 /*# sourceMappingURL=style.css.map */
+/* === KPPL overrides (Session 6) === */
+
+/* Service detail page main slider - uniform 16:9-ish slide size */
+.service-dtls-slider .service-dtls-item img {
+    width: 100%;
+    height: 480px;
+    object-fit: cover;
+    object-position: center;
+}
+
+/* Media coverage cards - uniform logo area, contain not crop, white background */
+.blog-area-two .blog-card > a:first-of-type {
+    display: block;
+    width: 100%;
+    height: 220px;
+    background: #ffffff;
+    overflow: hidden;
+}
+.blog-area-two .blog-card > a:first-of-type img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: center;
+    padding: 24px 28px;
+    background: #ffffff;
+}
+
+/* Blog page news cards (same treatment so logos / promo images render consistently) */
+.blog-area .blog-card > a:first-of-type {
+    display: block;
+    width: 100%;
+    height: 220px;
+    background: #ffffff;
+    overflow: hidden;
+}
+.blog-area .blog-card > a:first-of-type img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: center;
+    padding: 24px 28px;
+    background: #ffffff;
+}

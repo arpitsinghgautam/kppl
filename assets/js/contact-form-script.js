@@ -1,62 +1,62 @@
-/*==============================================================*/
-// Raque Contact Form  JS
-/*==============================================================*/
+/* Kamala Press contact form — submits to FormSubmit AJAX (works on static hosts incl. GitHub Pages). */
 (function ($) {
-    "use strict"; // Start of use strict
+    "use strict";
     $("#contactForm").validator().on("submit", function (event) {
         if (event.isDefaultPrevented()) {
-            // handle the invalid form...
             formError();
             submitMSG(false, "Did you fill up the form properly?");
         } else {
-            // everything looks good!
             event.preventDefault();
             submitForm();
         }
     });
 
-
-    function submitForm(){
-        // Initiate Variables With Form Content
-        var name = $("#name").val();
-        var email = $("#email").val();
-        var msg_subject = $("#msg_subject").val();
-        var phone_number = $("#phone_number").val();
-        var message = $("#message").val();
-
+    function submitForm() {
+        var payload = {
+            name:         $("#name").val(),
+            email:        $("#email").val(),
+            msg_subject:  $("#msg_subject").val(),
+            phone_number: $("#phone_number").val(),
+            message:      $("#message").val(),
+            _subject:     "New enquiry from KPPL website",
+            _template:    "table",
+            _captcha:     "false"
+        };
 
         $.ajax({
             type: "POST",
-            url: "assets/php/form-process.php",
-            data: "name=" + name + "&email=" + email + "&msg_subject=" + msg_subject + "&phone_number=" + phone_number + "&message=" + message,
-            success : function(text){
-                if (text == "success"){
+            url: "https://formsubmit.co/ajax/kamalaprintingpress@gmail.com",
+            dataType: "json",
+            accepts: "application/json",
+            data: payload,
+            success: function (data) {
+                if (data && (data.success === "true" || data.success === true)) {
                     formSuccess();
                 } else {
                     formError();
-                    submitMSG(false,text);
+                    submitMSG(false, (data && data.message) ? data.message : "Couldn't send right now. Please email us directly.");
                 }
+            },
+            error: function () {
+                formError();
+                submitMSG(false, "Network error. Please email us at kamalaprintingpress@gmail.com or call +91 9919995500.");
             }
         });
     }
 
-    function formSuccess(){
+    function formSuccess() {
         $("#contactForm")[0].reset();
-        submitMSG(true, "Message Submitted!")
+        submitMSG(true, "Message sent — we'll get back to you within one working day.");
     }
 
-    function formError(){
-        $("#contactForm").removeClass().addClass('shake animated').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){
+    function formError() {
+        $("#contactForm").removeClass().addClass('shake animated').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function () {
             $(this).removeClass();
         });
     }
 
-    function submitMSG(valid, msg){
-        if(valid){
-            var msgClasses = "h4 tada animated text-success";
-        } else {
-            var msgClasses = "h4 text-danger";
-        }
+    function submitMSG(valid, msg) {
+        var msgClasses = valid ? "h4 tada animated text-success" : "h4 text-danger";
         $("#msgSubmit").removeClass().addClass(msgClasses).text(msg);
     }
-}(jQuery)); // End of use strict
+}(jQuery));
