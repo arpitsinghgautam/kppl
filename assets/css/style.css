@@ -5222,3 +5222,27 @@ Animation  CSS End
     padding: 24px 28px;
     background: #ffffff;
 }
+
+/* Mobile nav bar — white background to match desktop header */
+.mean-container .mean-bar {
+    background-color: #ffffff !important;
+    -webkit-box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+}
+/* Hamburger icon: dark so it's visible against the white bar */
+.mean-container a.meanmenu-reveal {
+    color: #303651 !important;
+}
+.mean-container a.meanmenu-reveal span {
+    background-color: #303651 !important;
+}
+/* Mobile dropdown menu items: dark text + thin dividers on white */
+.mobile-nav .mean-container .mean-nav ul li a {
+    color: #303651;
+    border-top: 1px solid #e6e6e6;
+}
+.mobile-nav .mean-container .mean-nav ul li a:hover,
+.mobile-nav .mean-container .mean-nav ul li a.active {
+    color: #ff743c;
+    background: rgba(255, 116, 60, 0.05);
+}
