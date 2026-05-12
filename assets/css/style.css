@@ -5246,3 +5246,11 @@ Animation  CSS End
     color: #ff743c;
     background: rgba(255, 116, 60, 0.05);
 }
+
+/* Preloader: white background so the logo reads properly; spinner dots in brand orange */
+.preloader {
+    background: #ffffff !important;
+}
+.spinner > div {
+    background-color: #ff743c !important;
+}
